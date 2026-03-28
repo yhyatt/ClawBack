@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 import requests
 
-from clawback.fx import FXCache, FXError, convert, get_rate
+from clawback.fx import FXCache, convert, get_rate
 from clawback.templates import get_display_amount
 
 

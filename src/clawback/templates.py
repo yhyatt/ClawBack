@@ -32,7 +32,7 @@ def get_display_amount(amount: Decimal, currency: str, base_currency: str) -> st
     if currency.upper() == base_currency.upper():
         return primary
     try:
-        from .fx import FXError, get_rate
+        from .fx import get_rate
 
         rate = get_rate(currency, base_currency)
         converted = (amount * rate).quantize(Decimal("0.01"))
