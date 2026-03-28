@@ -22,6 +22,25 @@ def format_currency(amount: Decimal, currency: str) -> str:
     return f"{symbol}{amount}"
 
 
+def get_display_amount(amount: Decimal, currency: str, base_currency: str) -> str:
+    """Format amount with base-currency equivalent annotation.
+
+    Returns "€250 (≈ ₪908)" when currency differs from base_currency,
+    or just "€250" when they match or rates are unavailable.
+    """
+    primary = format_currency(amount, currency)
+    if currency.upper() == base_currency.upper():
+        return primary
+    try:
+        from .fx import FXError, get_rate
+
+        rate = get_rate(currency, base_currency)
+        converted = (amount * rate).quantize(Decimal("0.01"))
+        return f"{primary} (≈ {format_currency(converted, base_currency)})"
+    except Exception:
+        return primary
+
+
 def format_splits_summary(splits: list[dict[str, Any]]) -> str:
     """Format a list of splits for display."""
     parts = []

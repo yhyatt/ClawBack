@@ -1,10 +1,13 @@
 """Currency exchange rates via frankfurter.app (free, no auth required)."""
 
+import logging
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import ClassVar
 
 import requests
+
+logger = logging.getLogger(__name__)
 
 
 class FXError(Exception):
@@ -99,6 +102,9 @@ def convert(amount: Decimal, from_ccy: str, to_ccy: str) -> Decimal:
     """
     Convert an amount from one currency to another.
 
+    Falls back to returning the original amount (rate=1.0) if the exchange
+    rate API is unreachable, rather than crashing.
+
     Args:
         amount: Amount to convert
         from_ccy: Source currency code
@@ -110,6 +116,11 @@ def convert(amount: Decimal, from_ccy: str, to_ccy: str) -> Decimal:
     if from_ccy.upper() == to_ccy.upper():
         return amount
 
-    rate = get_rate(from_ccy, to_ccy)
+    try:
+        rate = get_rate(from_ccy, to_ccy)
+    except FXError as e:
+        logger.warning("FX rate unavailable (%s->%s), using 1.0: %s", from_ccy, to_ccy, e)
+        return amount
+
     converted = amount * rate
     return converted.quantize(Decimal("0.01"))

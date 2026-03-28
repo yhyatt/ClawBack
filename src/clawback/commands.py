@@ -58,7 +58,8 @@ def format_confirmation(cmd: ParsedCommand, trip: Trip | None = None) -> str:
         assert cmd.currency is not None
         assert cmd.description is not None
         assert cmd.paid_by is not None
-        amount_display = templates.format_currency(cmd.amount, cmd.currency)
+        base = trip.base_currency if trip else "ILS"
+        amount_display = templates.get_display_amount(cmd.amount, cmd.currency, base)
 
         if cmd.split_type == SplitType.CUSTOM:
             assert cmd.custom_splits is not None
@@ -139,7 +140,8 @@ def format_confirmation(cmd: ParsedCommand, trip: Trip | None = None) -> str:
         assert cmd.currency is not None
         assert cmd.from_person is not None
         assert cmd.to_person is not None
-        amount_display = templates.format_currency(cmd.amount, cmd.currency)
+        base = trip.base_currency if trip else "ILS"
+        amount_display = templates.get_display_amount(cmd.amount, cmd.currency, base)
         return templates.CONFIRM_SETTLE.format(
             from_person=cmd.from_person,
             to_person=cmd.to_person,
@@ -498,7 +500,7 @@ class CommandHandler:
                 sheets_error = str(e)
 
         # Format response
-        amount_display = templates.format_currency(expense.amount, expense.currency)
+        amount_display = templates.get_display_amount(expense.amount, expense.currency, new_trip.base_currency)
         splits_summary = ", ".join(
             f"{s.person} {templates.format_currency(s.amount, s.currency)}" for s in expense.splits
         )
@@ -560,7 +562,7 @@ class CommandHandler:
                 sheets_error = str(e)
 
         # Format response
-        amount_display = templates.format_currency(settlement.amount, settlement.currency)
+        amount_display = templates.get_display_amount(settlement.amount, settlement.currency, new_trip.base_currency)
         debts = ledger.simplified_debts(new_trip, new_trip.base_currency)
         debts_summary = templates.format_debts_list(debts, new_trip.base_currency)
 
