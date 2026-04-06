@@ -10,7 +10,7 @@
 [![codecov](https://codecov.io/gh/yhyatt/clawback/branch/main/graph/badge.svg)](https://codecov.io/gh/yhyatt/clawback)
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://github.com/yhyatt/clawback)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![OpenClaw Skill](https://img.shields.io/badge/OpenClaw-Skill-blue)](https://clawhub.com/skills/clawback-expense)
+[![OpenClaw Skill](https://img.shields.io/badge/OpenClaw-Skill-blue)](https://github.com/yhyatt/clawback)
 [![Contributing](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
 
 No forms. No dropdowns. No app to install.  
@@ -198,10 +198,10 @@ User message (natural language)
 pip install clawback
 ```
 
-Or install the [OpenClaw skill](https://clawhub.com/skills/clawback-expense) and let your AI assistant handle it:
+Or install the [OpenClaw skill](https://github.com/yhyatt/clawback) and let your AI assistant handle it:
 
 ```bash
-clawhub install clawback-expense
+https://github.com/yhyatt/clawback
 ```
 
 ### First-time setup
@@ -324,7 +324,7 @@ pytest -m oracle --haiku
 ClawBack ships as an [OpenClaw](https://openclaw.ai) skill. Install it and your AI assistant can parse expenses from WhatsApp or Telegram automatically — no manual `clawback handle` commands needed.
 
 ```bash
-clawhub install clawback-expense
+https://github.com/yhyatt/clawback
 ```
 
 Once installed, just talk naturally in your group:
