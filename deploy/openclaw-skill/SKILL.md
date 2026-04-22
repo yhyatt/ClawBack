@@ -150,7 +150,7 @@ See the detailed breakdown and full transaction log here:
 [Sheet URL] → Check the "Settlements" tab for who owes what
 
 Thanks for a great event!
-— Kai
+— Am Israel Kai
 ```
 
 ## References
