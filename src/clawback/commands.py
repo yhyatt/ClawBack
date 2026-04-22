@@ -500,7 +500,9 @@ class CommandHandler:
                 sheets_error = str(e)
 
         # Format response
-        amount_display = templates.get_display_amount(expense.amount, expense.currency, new_trip.base_currency)
+        amount_display = templates.get_display_amount(
+            expense.amount, expense.currency, new_trip.base_currency
+        )
         splits_summary = ", ".join(
             f"{s.person} {templates.format_currency(s.amount, s.currency)}" for s in expense.splits
         )
@@ -562,7 +564,9 @@ class CommandHandler:
                 sheets_error = str(e)
 
         # Format response
-        amount_display = templates.get_display_amount(settlement.amount, settlement.currency, new_trip.base_currency)
+        amount_display = templates.get_display_amount(
+            settlement.amount, settlement.currency, new_trip.base_currency
+        )
         debts = ledger.simplified_debts(new_trip, new_trip.base_currency)
         debts_summary = templates.format_debts_list(debts, new_trip.base_currency)
 
