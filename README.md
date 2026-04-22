@@ -160,8 +160,12 @@ Writes show a structured preview before committing. User confirms with "yes" or 
   Reply yes to confirm, no to cancel.
 ```
 
-### 📊 Google Sheets Backend
-Every trip has a shared Google Sheet. All participants can see live balances without installing anything.
+### 📊 Google Sheets Backend (Mandatory)
+Every expense ledger **requires** a Google Sheet — created automatically on trip initialization. Two-tab structure:
+- **Audit tab:** Append-only transaction log with full split details (Date, Time, Payer, Description, Amount, Split breakdown)
+- **Balances tab:** Live summary (Person, Total Paid, Total Owed, Net, Status)
+
+Sheet is automatically shared with all participants (organizer = editor, others = viewers). No setup needed — just add expenses and the sheet syncs in real-time.
 
 ### 🔢 Decimal-Safe Arithmetic
 All financial math uses Python `Decimal` — never floats. No rounding surprises.
